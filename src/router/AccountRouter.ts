@@ -1,8 +1,6 @@
 import * as express from 'express'
 const router = express.Router()
-
 const AccountController = require('./../controller/AccountController')
-const KarmaMiddleware = require('./../middleware/KarmaMiddleware')
 
 
 
