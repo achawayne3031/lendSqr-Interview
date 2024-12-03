@@ -35,16 +35,13 @@ const checkUserLoanCredibility = (identity) => __awaiter(void 0, void 0, void 0,
         else {
             return false;
         }
-        console.log('Response data:', response.data);
     }
     catch (error) {
         if (axios_1.default.isAxiosError(error)) {
-            return false;
-            console.error('Error message:', error.message);
+            throw error;
         }
         else {
-            return false;
-            console.error('Unexpected error:', error);
+            throw error;
         }
     }
 });
