@@ -1,18 +1,19 @@
-import * as express from 'express'
-const router = express.Router()
+import express from 'express';
+const app = express();
+app.use(express.json());
 const AccountController = require('./../controller/AccountController')
 
 
 
-router.post('/create', AccountController.createAccount)
-router.post('/fund', AccountController.fundAccount)
-router.post('/withdraw', AccountController.withdrawal)
-router.post('/transfer', AccountController.transfer)
+
+app.post('/api/account/create', AccountController.createAccount)
+app.post('/api/account/fund', AccountController.fundAccount)
+app.post('/api/account/withdraw', AccountController.withdrawal)
+app.post('/api/account/transfer', AccountController.transfer)
 
 
 
 
 
 
-
-module.exports = router
+export default app;

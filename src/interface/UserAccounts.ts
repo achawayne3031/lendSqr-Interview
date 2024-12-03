@@ -5,4 +5,5 @@ interface UserAccounts{
     email: string,
     phone: string,
     status: Number
+    user_code: string
 }

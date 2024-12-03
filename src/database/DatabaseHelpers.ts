@@ -125,7 +125,6 @@ export const withdrawFromWallet = async (email: string, amount: string) => {
 
         await connection.beginTransaction();
 
-
         /// get User data
         const [results]  = await connection.query(`SELECT * FROM user_accounts INNER JOIN wallet_balance ON user_accounts.user_code = wallet_balance.user_code WHERE user_accounts.email = ?`, [email]);
 
@@ -164,11 +163,9 @@ export const withdrawFromWallet = async (email: string, amount: string) => {
 
 export const transferToBenficiary = async (sender_email: string, beneficiary_email: string,  amount: string) => {
 
-
     if(!onlyNumbersGreaterThanZero(amount)){
         return { status : false, message: 'Character must be greater than 1. Numbers only' }
     }
-
     const connection = await MysqlPool.getConnection();
 
     try {
