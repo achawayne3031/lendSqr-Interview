@@ -1,6 +1,6 @@
 
-[build]
-  functions = "functions"
 
 [dev]
   publish = "dist"
+  functions = "netlify-functions"
+  functionsPort = 5000
