@@ -1,7 +1,7 @@
 
 import MysqlPool from './../database/MysqlPool';
-const { generateRandom } = require('./../utils/FuncHelpers')
-const { onlyNumbersGreaterThanZero } = require('./../utils/FuncHelpers')
+import { generateRandom } from './../utils/FuncHelpers'
+import { onlyNumbersGreaterThanZero } from './../utils/FuncHelpers'
 
 
 

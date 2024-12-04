@@ -7,7 +7,7 @@ var AccountRouter_1 = __importDefault(require("./src/router/AccountRouter"));
 var env = require('dotenv').config({ debug: process.env.DEBUG });
 var port = process.env.PORT || 3000;
 AccountRouter_1.default.get('/', function (req, res) {
-    res.send('Hello World! Happy new day and July 13 2024');
+    res.send('Hello World!');
 });
 AccountRouter_1.default.listen(port, function () {
     console.log("Server started at http://localhost:".concat(port));

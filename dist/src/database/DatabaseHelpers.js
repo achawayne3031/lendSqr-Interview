@@ -41,8 +41,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transferToBenficiary = exports.withdrawFromWallet = exports.fundUserWallet = exports.getUserData = exports.emailExist = exports.createAccountQuery = void 0;
 var MysqlPool_1 = __importDefault(require("./../database/MysqlPool"));
-var generateRandom = require('./../utils/FuncHelpers').generateRandom;
-var onlyNumbersGreaterThanZero = require('./../utils/FuncHelpers').onlyNumbersGreaterThanZero;
+var FuncHelpers_1 = require("./../utils/FuncHelpers");
+var FuncHelpers_2 = require("./../utils/FuncHelpers");
 var createAccountQuery = function (table, data) { return __awaiter(void 0, void 0, void 0, function () {
     var connection, userCode, DbError_1;
     return __generator(this, function (_a) {
@@ -56,7 +56,7 @@ var createAccountQuery = function (table, data) { return __awaiter(void 0, void 
                 return [4 /*yield*/, connection.beginTransaction()];
             case 3:
                 _a.sent();
-                userCode = generateRandom(10);
+                userCode = (0, FuncHelpers_1.generateRandom)(10);
                 // create user account ///
                 return [4 /*yield*/, connection.query('INSERT INTO `user_accounts` (`full_name`, `email`, `phone`, `user_code`) VALUES(?, ?, ?, ?)', [data.full_name, data.email, data.phone, userCode])];
             case 4:
@@ -135,7 +135,7 @@ var fundUserWallet = function (email, amount) { return __awaiter(void 0, void 0,
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                if (!onlyNumbersGreaterThanZero(amount)) {
+                if (!(0, FuncHelpers_2.onlyNumbersGreaterThanZero)(amount)) {
                     return [2 /*return*/, { status: false, message: 'Character must be greater than 1. Numbers only' }];
                 }
                 return [4 /*yield*/, MysqlPool_1.default.getConnection()];
@@ -180,7 +180,7 @@ var withdrawFromWallet = function (email, amount) { return __awaiter(void 0, voi
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                if (!onlyNumbersGreaterThanZero(amount)) {
+                if (!(0, FuncHelpers_2.onlyNumbersGreaterThanZero)(amount)) {
                     return [2 /*return*/, { status: false, message: 'Character must be greater than 1. Numbers only' }];
                 }
                 return [4 /*yield*/, MysqlPool_1.default.getConnection()];
@@ -228,7 +228,7 @@ var transferToBenficiary = function (sender_email, beneficiary_email, amount) { 
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                if (!onlyNumbersGreaterThanZero(amount)) {
+                if (!(0, FuncHelpers_2.onlyNumbersGreaterThanZero)(amount)) {
                     return [2 /*return*/, { status: false, message: 'Character must be greater than 1. Numbers only' }];
                 }
                 return [4 /*yield*/, MysqlPool_1.default.getConnection()];
