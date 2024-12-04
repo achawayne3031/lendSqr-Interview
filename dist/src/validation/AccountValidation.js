@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateTransferData = exports.validateAccountWithdrawalData = exports.validateFundAccountData = exports.validateCreateAccountData = void 0;
-const Joi = require('joi');
-const validateCreateAccountData = (data) => {
-    const schema = Joi.object({
+var Joi = require('joi');
+var validateCreateAccountData = function (data) {
+    var schema = Joi.object({
         full_name: Joi.string().required().messages({
             "any.required": "full name field is required",
             "string.empty": "full name should not be empty",
@@ -21,8 +21,8 @@ const validateCreateAccountData = (data) => {
     return schema.validate(data);
 };
 exports.validateCreateAccountData = validateCreateAccountData;
-const validateFundAccountData = (data) => {
-    const schema = Joi.object({
+var validateFundAccountData = function (data) {
+    var schema = Joi.object({
         email: Joi.string().email().required().messages({
             "any.required": "email field is required",
             "string.empty": "email should not be empty",
@@ -36,8 +36,8 @@ const validateFundAccountData = (data) => {
     return schema.validate(data);
 };
 exports.validateFundAccountData = validateFundAccountData;
-const validateAccountWithdrawalData = (data) => {
-    const schema = Joi.object({
+var validateAccountWithdrawalData = function (data) {
+    var schema = Joi.object({
         email: Joi.string().email().required().messages({
             "any.required": "email field is required",
             "string.empty": "email should not be empty",
@@ -51,8 +51,8 @@ const validateAccountWithdrawalData = (data) => {
     return schema.validate(data);
 };
 exports.validateAccountWithdrawalData = validateAccountWithdrawalData;
-const validateTransferData = (data) => {
-    const schema = Joi.object({
+var validateTransferData = function (data) {
+    var schema = Joi.object({
         sender_email: Joi.string().email().required().messages({
             "any.required": "sender email field is required",
             "string.empty": "sender email should not be empty",

@@ -4,15 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.onlyNumbersGreaterThanZero = exports.generateRandom = void 0;
-const crypto_1 = __importDefault(require("crypto"));
-const generateRandom = (size = 20) => {
+var crypto_1 = __importDefault(require("crypto"));
+var generateRandom = function (size) {
+    if (size === void 0) { size = 20; }
     return crypto_1.default
         .randomBytes(size)
         .toString('base64')
         .slice(0, size);
 };
 exports.generateRandom = generateRandom;
-const onlyNumbersGreaterThanZero = (amount) => {
+var onlyNumbersGreaterThanZero = function (amount) {
     if (!isNaN(parseFloat(amount)) && parseFloat(amount) > 0) {
         return true;
     }
