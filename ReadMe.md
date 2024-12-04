@@ -20,4 +20,8 @@ Note: render don't allow for web service name config. please accept this domain 
 # https://www.loom.com/share/00e542755a794b5ea4dd86bc67e47c3d?sid=fd2b7bea-52e4-4484-9579-a89017237c9d
 
 
+# Run "npm run test" to test the api
+# Run "npm run start:dev" to start the server locally
+# Run "npm run build" to build the project
+
 
