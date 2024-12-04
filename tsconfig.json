@@ -2,11 +2,12 @@
     "compilerOptions": {
       "module": "commonjs",
       "esModuleInterop": true,
-      "target": "es6",
       "moduleResolution": "node",
       "sourceMap": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "target": "es2021",
+      "allowJs": true,
     },
-    "lib": ["es2015"],
+    "lib": ["es2021"],
     "include": ["src/**/*.ts","./server.ts"],
   }

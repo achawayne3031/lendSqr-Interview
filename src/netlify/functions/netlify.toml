@@ -1,6 +1,0 @@
-
-
-[dev]
-  publish = "dist"
-  functions = "netlify-functions"
-  functionsPort = 5000

@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const { validateCreateAccountData, validateFundAccountData, validateAccountWithdrawalData, validateTransferData } = require('./../validation/AccountValidation');
 const { ResponseData } = require('./../response/resData');
@@ -15,7 +6,7 @@ const { checkUserLoanCredibility } = require('./../service/KarmaBlacklist');
 const { createAccountQuery, emailExist, getUserData, fundUserWallet, withdrawFromWallet, transferToBenficiary } = require('./../database/DatabaseHelpers');
 const { generateRandom } = require('./../utils/FuncHelpers');
 const AccountController = {
-    createAccount: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    createAccount: async (req, res) => {
         const { error } = validateCreateAccountData(req.body);
         if (error) {
             return res.json(ResponseData('failed', false, 'Validation error.', error.details[0].message));
@@ -23,22 +14,22 @@ const AccountController = {
         try {
             const { email, phone } = req.body;
             // check Karma
-            if ((yield checkUserLoanCredibility(email)) || (yield checkUserLoanCredibility(phone))) {
+            if (await checkUserLoanCredibility(email) || await checkUserLoanCredibility(phone)) {
                 return res.json(ResponseData('failed', false, 'You do not qualify to register on this platform, try and clear all your prevous debit', null));
             }
             /// check if email exists
-            if (yield emailExist(email)) {
+            if (await emailExist(email)) {
                 return res.json(ResponseData('failed', false, 'Email address already in the system', null));
             }
             // create account //
-            yield createAccountQuery('user_accounts', req.body);
+            await createAccountQuery('user_accounts', req.body);
             return res.json(ResponseData('success', true, 'Account created', null));
         }
         catch (ReqError) {
             return res.json(ResponseData('failed', false, 'Internal Server Error', ReqError));
         }
-    }),
-    fundAccount: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    },
+    fundAccount: async (req, res) => {
         const { error } = validateFundAccountData(req.body);
         if (error) {
             return res.json(ResponseData('failed', false, 'Validation error.', error.details[0].message));
@@ -46,10 +37,10 @@ const AccountController = {
         try {
             const { email, amount } = req.body;
             /// check if email exists
-            if (!(yield emailExist(email))) {
+            if (!await emailExist(email)) {
                 return res.json(ResponseData('failed', false, 'User not found in the system', null));
             }
-            let fundStatus = yield fundUserWallet(email, amount);
+            let fundStatus = await fundUserWallet(email, amount);
             if (!fundStatus) {
                 return res.json(ResponseData('failed', false, 'Account not funded', null));
             }
@@ -58,8 +49,8 @@ const AccountController = {
         catch (ReqError) {
             return res.json(ResponseData('failed', false, 'Internal Server Error', ReqError));
         }
-    }),
-    transfer: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    },
+    transfer: async (req, res) => {
         const { error } = validateTransferData(req.body);
         if (error) {
             return res.json(ResponseData('failed', false, 'Validation error.', error.details[0].message));
@@ -67,14 +58,14 @@ const AccountController = {
         try {
             const { sender_email, beneficiary_email, amount } = req.body;
             /// check if sender email exists
-            if (!(yield emailExist(sender_email))) {
+            if (!await emailExist(sender_email)) {
                 return res.json(ResponseData('failed', false, 'Sender user not found in the system', null));
             }
             /// check if beneficiary email exists
-            if (!(yield emailExist(beneficiary_email))) {
+            if (!await emailExist(beneficiary_email)) {
                 return res.json(ResponseData('failed', false, 'Beneficiary user not found in the system', null));
             }
-            let transferStatus = yield transferToBenficiary(sender_email, beneficiary_email, amount);
+            let transferStatus = await transferToBenficiary(sender_email, beneficiary_email, amount);
             if (!transferStatus.status) {
                 return res.json(ResponseData('failed', false, transferStatus.message, null));
             }
@@ -83,8 +74,8 @@ const AccountController = {
         catch (ReqError) {
             return res.json(ResponseData('failed', false, 'Internal Server Error', ReqError));
         }
-    }),
-    withdrawal: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    },
+    withdrawal: async (req, res) => {
         const { error } = validateAccountWithdrawalData(req.body);
         if (error) {
             return res.json(ResponseData('failed', false, 'Validation error.', error.details[0].message));
@@ -92,10 +83,10 @@ const AccountController = {
         try {
             const { email, amount } = req.body;
             /// check if email exists
-            if (!(yield emailExist(email))) {
+            if (!await emailExist(email)) {
                 return res.json(ResponseData('failed', false, 'User not found in the system', null));
             }
-            let withdrawStatus = yield withdrawFromWallet(email, amount);
+            let withdrawStatus = await withdrawFromWallet(email, amount);
             if (!withdrawStatus.status) {
                 return res.json(ResponseData('failed', false, withdrawStatus.message, null));
             }
@@ -104,7 +95,7 @@ const AccountController = {
         catch (ReqError) {
             return res.json(ResponseData('failed', false, 'Internal Server Error', ReqError));
         }
-    }),
+    },
 };
 module.exports = AccountController;
 //# sourceMappingURL=AccountController.js.map

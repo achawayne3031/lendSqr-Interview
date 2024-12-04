@@ -1,24 +1,15 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkUserLoanCredibility = void 0;
 const axios_1 = __importDefault(require("axios"));
-const checkUserLoanCredibility = (identity) => __awaiter(void 0, void 0, void 0, function* () {
+const checkUserLoanCredibility = async (identity) => {
     try {
         const token = 'sk_live_Hfvcf9srOs5pPWDporlAOWpDqrjon0y9PeUysTtB';
         const url = `https://adjutor.lendsqr.com/v2/verification/karma/${identity}`;
-        const response = yield axios_1.default.get(url, {
+        const response = await axios_1.default.get(url, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
@@ -44,6 +35,6 @@ const checkUserLoanCredibility = (identity) => __awaiter(void 0, void 0, void 0,
             throw error;
         }
     }
-});
+};
 exports.checkUserLoanCredibility = checkUserLoanCredibility;
 //# sourceMappingURL=KarmaBlacklist.js.map

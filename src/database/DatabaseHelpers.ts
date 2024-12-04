@@ -1,7 +1,6 @@
 
 import MysqlPool from './../database/MysqlPool';
 const { generateRandom } = require('./../utils/FuncHelpers')
-
 const { onlyNumbersGreaterThanZero } = require('./../utils/FuncHelpers')
 
 

@@ -1,8 +1,8 @@
 import express from 'express';
-const app = express();
-app.use(express.json());
 const AccountController = require('./../controller/AccountController')
 
+const app = express();
+app.use(express.json());
 
 
 
@@ -13,7 +13,5 @@ app.post('/api/account/transfer', AccountController.transfer)
 
 
 
-
-
-
 export default app;
+
