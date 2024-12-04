@@ -11,6 +11,7 @@ var MysqlPool = promise_1.default.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    port: parseInt(process.env.DB_PORT)
 });
 exports.default = MysqlPool;
 //# sourceMappingURL=MysqlPool.js.map
